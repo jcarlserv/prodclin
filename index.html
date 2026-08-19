@@ -42,12 +42,43 @@
   .menu-brand{padding:14px 24px; font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:18px; color:var(--ink); display:flex; align-items:center; gap:8px; white-space:nowrap; border-right:1px solid var(--line);}
   .menu-brand .dot{width:8px;height:8px;background:var(--stamp);border-radius:50%;display:inline-block;}
   .menu-sections{display:flex; flex:1; height:100%;}
-  .menu-section{display:flex; align-items:center; height:100%; border-right:1px solid var(--line);}
-  .menu-section-title{padding:14px 16px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); display:flex; align-items:center; gap:6px;}
-  .menu-items{display:flex; align-items:center; height:100%;}
-  .menu-item{padding:12px 14px; font-size:13px; font-weight:500; color:var(--ink); cursor:pointer; border-bottom:3px solid transparent; transition:all .12s ease; white-space:nowrap; display:flex; align-items:center; gap:6px;}
-  .menu-item:hover{background:var(--paper-2); color:var(--ink);}
-  .menu-item.active{border-bottom-color:var(--stamp); color:var(--stamp-dark); font-weight:700;}
+  /* Menu Dropdowns */
+  .menu-section {display:flex; align-items:center; height:100%; border-right:1px solid var(--line); position:relative;}
+  .menu-dropdown{position:relative;}
+  .dropdown-toggle{padding:12px 14px; font-size:13px; font-weight:500; color:var(--ink); cursor:pointer; display:flex; align-items:center; gap:6px; transition:all .12s ease;}
+  .dropdown-toggle:hover{background:var(--paper-2); color:var(--ink);}
+  .dropdown-menu{position:absolute; top:100%; left:0; background:#fff; border:1px solid var(--line); border-top:none; border-radius:0 0 8px 8px; min-width:200px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:1000; display:none; padding:0;}
+  .dropdown-menu.show{display:block;}
+  .dropdown-menu a, .dropdown-menu .menu-item{display:block; padding:12px 16px; font-size:13px; color:var(--ink); cursor:pointer; transition:all .12s ease; border-bottom:1px solid var(--line);}
+  .dropdown-menu a:last-child, .dropdown-menu .menu-item:last-child{border-bottom:none; border-radius:0 0 8px 8px;}
+  .dropdown-menu a:hover, .dropdown-menu .menu-item:hover{background:var(--paper-2); padding-left:20px;}
+  .dropdown-menu a.active, .dropdown-menu .menu-item.active{background:#FBF1EE; color:var(--stamp); font-weight:600;}
+
+  /* Quick Links */
+  .quick-links{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:24px;}
+  .quick-link-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:20px; text-align:center; cursor:pointer; transition:all .2s ease; text-decoration:none; color:var(--ink);}
+  .quick-link-card:hover{border-color:var(--stamp); transform:translateY(-4px); box-shadow:0 8px 20px rgba(178,58,46,0.15);}
+  .quick-link-card .icon{font-size:32px; margin-bottom:12px;}
+  .quick-link-card .title{font-size:14px; font-weight:700; margin-bottom:4px;}
+  .quick-link-card .desc{font-size:12px; color:var(--ink-soft);}
+
+  /* Drawer Menu (Mobile) */
+  .menu-drawer{position:fixed; top:0; left:-100%; width:100%; max-width:350px; height:100vh; background:#fff; z-index:9998; transition:left .3s ease; overflow-y:auto; box-shadow:2px 0 8px rgba(0,0,0,0.15);}
+  .menu-drawer.show{left:0;}
+  .menu-drawer-close{position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:var(--ink);}
+  .menu-drawer-section{padding:16px 0; border-bottom:1px solid var(--line);}
+  .menu-drawer-section:first-child{padding-top:60px;}
+  .menu-drawer-title{padding:0 16px; font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;}
+  .menu-drawer-item{padding:12px 16px; color:var(--ink); cursor:pointer; transition:all .12s ease;}
+  .menu-drawer-item:hover{background:var(--paper-2); padding-left:24px;}
+  .menu-drawer-item.active{background:#FBF1EE; color:var(--stamp);}
+  .menu-toggle-btn{display:none; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink);}
+
+  @media (max-width:960px){
+    .top-menu{padding:12px 16px;}
+    .menu-toggle-btn{display:block;}
+    .menu-sections{display:none;}
+  }
 
   .content{flex:1; overflow-y:auto; padding:48px 40px 80px;}
   .panel{display:none; max-width:760px; margin:0 auto;}
@@ -159,14 +190,36 @@
   #qrCanvas{border-radius:6px;}
   .qr-placeholder{color:var(--ink-soft); font-size:14px; text-align:center;}
 
-  @media (max-width:860px){
-    .top-menu{flex-wrap:wrap; height:auto;}
-    .menu-brand{width:100%; border-right:none; border-bottom:1px solid var(--line);}
-    .menu-sections{width:100%; flex-wrap:wrap;}
-    .menu-section{width:100%; border-bottom:1px solid var(--line); border-right:none;}
-    .menu-section-title{display:none;}
-    .menu-items{width:100%; overflow-x:auto;}
-    .content{padding:28px 18px 60px;}
+  /* Admin Styles */
+  .admin-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px;}
+  .admin-card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:24px;}
+  .admin-card h3{font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin:0 0 16px;}
+  .admin-label{font-size:12px; font-weight:600; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; display:block;}
+  .admin-input{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:7px; font-size:14px; margin-bottom:12px; font-family:inherit;}
+  .admin-input:focus{outline:none; border-color:var(--stamp); box-shadow:0 0 0 3px rgba(178,58,46,0.1);}
+  .color-picker-wrapper{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .color-preview{width:50px; height:50px; border-radius:8px; border:1px solid var(--line);}
+  .logo-preview{width:100px; height:100px; border:1px solid var(--line); border-radius:8px; display:flex; align-items:center; justify-content:center; margin:12px 0; background:var(--paper-2);}
+  .logo-preview img{max-width:100%; max-height:100%; border-radius:6px;}
+  .users-table{width:100%; border-collapse:collapse; margin-top:12px;}
+  .users-table th{background:var(--paper-2); padding:12px; text-align:left; font-size:12px; font-weight:700; border-bottom:1px solid var(--line);}
+  .users-table td{padding:12px; border-bottom:1px solid var(--line); font-size:13px;}
+  .users-table tr:hover{background:var(--paper-2);}
+  .role-badge{display:inline-block; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700; text-transform:uppercase;}
+  .role-admin{background:#FFE6E6; color:#B23A2E;}
+  .role-editor{background:#E6F2FF; color:#378ADD;}
+  .role-viewer{background:#F0F0F0; color:#666;}
+  .status-badge{display:inline-block; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;}
+  .status-active{background:#E6F5EA; color:#2F6B4F;}
+  .status-inactive{background:#F9EDED; color:#8E2C22;}
+  .logs-container{max-height:500px; overflow-y:auto; background:var(--paper-2); border-radius:8px; padding:12px;}
+  .log-entry{padding:8px; border-bottom:1px solid var(--line); font-size:12px; font-family:'Courier New',monospace;}
+  .log-entry .log-time{color:var(--stamp); font-weight:700;}
+  .log-entry .log-user{color:var(--ink-soft);}
+  .log-entry .log-action{color:var(--ink);}
+
+  @media (max-width:960px){
+    .admin-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -218,11 +271,14 @@
         </div>
       </div>
 
-      <!-- QR Code -->
+      <!-- Admin -->
       <div class="menu-section">
-        <div class="menu-section-title">🔲 QR CODE</div>
+        <div class="menu-section-title">⚙️ ADMIN</div>
         <div class="menu-items">
-          <div class="menu-item" data-panel="panel-qrcode">Gerador QR</div>
+          <div class="menu-item" data-panel="panel-admin">Configurações</div>
+          <div class="menu-item" data-panel="panel-admin-users">Usuários</div>
+          <div class="menu-item" data-panel="panel-admin-logs">Logs</div>
+          <div class="menu-item" id="logout-btn" style="cursor:pointer; color:#B23A2E;">Sair</div>
         </div>
       </div>
     </div>
@@ -525,8 +581,226 @@
       <div class="note-box">Esta conversão só recupera o texto de cada slide — o design visual não é reproduzido.</div>
     </div>
 
-    <!-- QR CODE GENERATOR PANEL -->
-    <div class="panel" id="panel-qrcode">
+    <!-- ADMIN PANELS -->
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; display:flex; align-items:center; justify-content:center;">
+      <div style="background:#fff; border-radius:12px; padding:40px; width:90%; max-width:400px; box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+        <h2 style="margin:0 0 30px; font-family:Georgia; font-size:24px; color:var(--ink);">Acesso ao Tudis Admin</h2>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label style="font-size:13px; font-weight:600; color:var(--ink-soft); margin-bottom:8px; display:block;">Usuário</label>
+          <input type="text" id="loginUser" placeholder="seu usuário" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:7px; font-size:14px;">
+        </div>
+        <div class="form-group" style="margin-bottom:24px;">
+          <label style="font-size:13px; font-weight:600; color:var(--ink-soft); margin-bottom:8px; display:block;">Senha</label>
+          <input type="password" id="loginPass" placeholder="sua senha" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:7px; font-size:14px;">
+        </div>
+        <button id="loginBtn" class="primary" style="width:100%; margin-bottom:12px;">Entrar</button>
+        <button id="demoLoginBtn" class="secondary" style="width:100%;">Demo (admin/admin)</button>
+      </div>
+    </div>
+
+    <!-- ADMIN CONFIGURAÇÕES -->
+    <div class="panel" id="panel-admin">
+      <div class="eyebrow">Administração</div>
+      <h1>Configurações do Sistema</h1>
+      <p class="desc">Configure o nome do sistema, logomarca, cores e informações gerais.</p>
+
+      <div class="admin-grid">
+        <!-- Informações Gerais -->
+        <div class="admin-card">
+          <h3>📋 Informações Gerais</h3>
+          <label class="admin-label">Nome do Sistema</label>
+          <input type="text" id="configSystemName" class="admin-input" placeholder="Tudis" value="Tudis">
+          
+          <label class="admin-label">Descrição</label>
+          <textarea id="configSystemDesc" class="admin-input" placeholder="Descrição do sistema" style="min-height:80px; resize:vertical;">Ferramentas de PDF, OCR e QR Code</textarea>
+          
+          <label class="admin-label">Versão</label>
+          <input type="text" id="configSystemVersion" class="admin-input" placeholder="1.0.0" value="1.0.0" readonly style="background:var(--paper-2); cursor:not-allowed;">
+          
+          <label class="admin-label">Desenvolvedor</label>
+          <input type="text" id="configDeveloper" class="admin-input" placeholder="Seu nome" value="Desenvolvedor">
+        </div>
+
+        <!-- Cores e Aparência -->
+        <div class="admin-card">
+          <h3>🎨 Cores e Aparência</h3>
+          
+          <label class="admin-label">Cor Principal</label>
+          <div class="color-picker-wrapper">
+            <input type="color" id="configColorStamp" value="#B23A2E" style="width:60px; height:50px; border:1px solid var(--line); border-radius:7px; cursor:pointer;">
+            <input type="text" id="configColorStampHex" class="admin-input" value="#B23A2E" style="flex:1;">
+          </div>
+
+          <label class="admin-label">Cor Secundária</label>
+          <div class="color-picker-wrapper">
+            <input type="color" id="configColorAccent" value="#2F6B4F" style="width:60px; height:50px; border:1px solid var(--line); border-radius:7px; cursor:pointer;">
+            <input type="text" id="configColorAccentHex" class="admin-input" value="#2F6B4F" style="flex:1;">
+          </div>
+
+          <label class="admin-label">Tema</label>
+          <select id="configTheme" class="admin-input">
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+            <option value="auto">Automático</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="admin-card" style="margin-bottom:24px;">
+        <h3>🖼️ Logomarca</h3>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:12px;">Upload de logo (PNG, JPG, SVG - máx 500KB)</p>
+        <input type="file" id="configLogoUpload" accept="image/*" style="margin-bottom:12px;">
+        <div class="logo-preview" id="logoPreview">
+          <span class="dot" style="width:40px; height:40px; background:var(--stamp); display:inline-block; border-radius:50%;"></span>
+        </div>
+        <button class="secondary" id="clearLogoBtn" style="width:100%;">Remover Logo</button>
+      </div>
+
+      <div style="display:flex; gap:12px;">
+        <button class="primary" id="saveConfigBtn" style="flex:1;">💾 Salvar Configurações</button>
+        <button class="secondary" id="resetConfigBtn" style="flex:1;">↺ Restaurar Padrões</button>
+      </div>
+    </div>
+
+    <!-- ADMIN USUÁRIOS -->
+    <div class="panel" id="panel-admin-users">
+      <div class="eyebrow">Administração</div>
+      <h1>Gerenciar Usuários</h1>
+      <p class="desc">Adicione, edite e configure permissões de acesso dos usuários.</p>
+
+      <div class="admin-grid">
+        <!-- Novo Usuário -->
+        <div class="admin-card">
+          <h3>➕ Novo Usuário</h3>
+          
+          <label class="admin-label">Nome de Usuário</label>
+          <input type="text" id="newUserName" class="admin-input" placeholder="Ex: joao.silva">
+          
+          <label class="admin-label">Email</label>
+          <input type="email" id="newUserEmail" class="admin-input" placeholder="joao@exemplo.com">
+          
+          <label class="admin-label">Senha</label>
+          <input type="password" id="newUserPass" class="admin-input" placeholder="Mínimo 6 caracteres">
+          
+          <label class="admin-label">Perfil de Acesso</label>
+          <select id="newUserRole" class="admin-input">
+            <option value="admin">Administrador</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Visualizador</option>
+          </select>
+          
+          <label class="admin-label">Status</label>
+          <select id="newUserStatus" class="admin-input">
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+          
+          <button class="primary" id="addUserBtn" style="width:100%;">Adicionar Usuário</button>
+        </div>
+
+        <!-- Descrição de Perfis -->
+        <div class="admin-card">
+          <h3>👥 Perfis de Acesso</h3>
+          
+          <div style="margin-bottom:16px;">
+            <strong style="color:var(--stamp);">👑 Administrador</strong>
+            <p style="font-size:12px; color:var(--ink-soft); margin:4px 0;">Acesso total ao sistema, gerenciamento de usuários, configurações e logs.</p>
+          </div>
+          
+          <div style="margin-bottom:16px;">
+            <strong style="color:#378ADD;">✏️ Editor</strong>
+            <p style="font-size:12px; color:var(--ink-soft); margin:4px 0;">Acesso a todas as ferramentas e recursos, sem gerenciar usuários.</p>
+          </div>
+          
+          <div>
+            <strong style="color:#666;">👁️ Visualizador</strong>
+            <p style="font-size:12px; color:var(--ink-soft); margin:4px 0;">Acesso limitado - apenas visualizar, sem fazer downloads.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de Usuários -->
+      <div class="admin-card">
+        <h3>📊 Usuários do Sistema</h3>
+        <div style="overflow-x:auto;">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>Usuário</th>
+                <th>Email</th>
+                <th>Perfil</th>
+                <th>Status</th>
+                <th>Criado em</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <!-- Preenchido por JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN LOGS -->
+    <div class="panel" id="panel-admin-logs">
+      <div class="eyebrow">Administração</div>
+      <h1>Logs do Sistema</h1>
+      <p class="desc">Histórico de atividades e eventos do sistema.</p>
+
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3>⏱️ Filtros</h3>
+          
+          <label class="admin-label">Tipo de Evento</label>
+          <select id="filterLogType" class="admin-input">
+            <option value="all">Todos</option>
+            <option value="login">Login</option>
+            <option value="logout">Logout</option>
+            <option value="tool_use">Uso de Ferramenta</option>
+            <option value="config_change">Alteração de Config</option>
+            <option value="user_manage">Gerenciamento de Usuário</option>
+          </select>
+
+          <label class="admin-label">Período</label>
+          <select id="filterLogPeriod" class="admin-input">
+            <option value="today">Hoje</option>
+            <option value="week">Últimos 7 dias</option>
+            <option value="month">Últimos 30 dias</option>
+            <option value="all">Tudo</option>
+          </select>
+
+          <button class="primary" id="applyFilterBtn" style="width:100%;">Aplicar Filtro</button>
+          <button class="secondary" id="clearLogsBtn" style="width:100%; margin-top:8px;">Limpar Logs</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>📈 Estatísticas</h3>
+          <div style="padding:12px; background:var(--paper-2); border-radius:8px; margin-bottom:12px;">
+            <p style="margin:0; font-size:12px; color:var(--ink-soft);">Total de Logs</p>
+            <p style="margin:4px 0 0; font-size:20px; font-weight:700; color:var(--stamp);" id="totalLogsCount">0</p>
+          </div>
+          <div style="padding:12px; background:var(--paper-2); border-radius:8px; margin-bottom:12px;">
+            <p style="margin:0; font-size:12px; color:var(--ink-soft);">Hoje</p>
+            <p style="margin:4px 0 0; font-size:20px; font-weight:700; color:#378ADD;" id="todayLogsCount">0</p>
+          </div>
+          <div style="padding:12px; background:var(--paper-2); border-radius:8px;">
+            <p style="margin:0; font-size:12px; color:var(--ink-soft);">Usuários Ativos</p>
+            <p style="margin:4px 0 0; font-size:20px; font-weight:700; color:#2F6B4F;" id="activeUsersCount">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logs Container -->
+      <div class="admin-card">
+        <h3>📝 Registro de Atividades</h3>
+        <div class="logs-container" id="logsContainer">
+          <!-- Preenchido por JavaScript -->
+        </div>
+      </div>
+    </div>
       <div class="eyebrow">Gerador QR Code</div>
       <h1>Criar QR Code Personalizado</h1>
       <p class="desc">Gere códigos QR para links, contatos, WiFi, eventos e muito mais, totalmente personalizados.</p>
@@ -1116,7 +1390,431 @@ function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
   generateQr();
 })();
 
-/* Implementação dos painéis restantes de PDF, OCR e Conversões omitida para brevidade, mas seguem o mesmo padrão dos primeiros */
+/* ============ ADMIN SYSTEM ============ */
+class TudisAdmin {
+  constructor() {
+    this.currentUser = null;
+    this.users = [];
+    this.logs = [];
+    this.config = {
+      systemName: 'Tudis',
+      systemDesc: 'Ferramentas de PDF, OCR e QR Code',
+      version: '1.0.0',
+      developer: 'Desenvolvedor',
+      colorStamp: '#B23A2E',
+      colorAccent: '#2F6B4F',
+      theme: 'light',
+      logo: null
+    };
+    this.init();
+  }
+
+  init() {
+    this.loadFromStorage();
+    this.checkAuth();
+    this.setupEventListeners();
+    this.updateUI();
+  }
+
+  loadFromStorage() {
+    const stored = localStorage.getItem('tudis_admin');
+    if (stored) {
+      const data = JSON.parse(stored);
+      this.users = data.users || [];
+      this.config = data.config || this.config;
+      this.logs = data.logs || [];
+    } else {
+      this.setupDefaults();
+      this.saveToStorage();
+    }
+  }
+
+  setupDefaults() {
+    this.users = [
+      { id: 1, username: 'admin', email: 'admin@tudis.com', password: this.hashPassword('admin'), role: 'admin', status: 'ativo', createdAt: new Date().toISOString() }
+    ];
+  }
+
+  hashPassword(pass) {
+    return btoa(pass);
+  }
+
+  saveToStorage() {
+    const data = { users: this.users, config: this.config, logs: this.logs };
+    localStorage.setItem('tudis_admin', JSON.stringify(data));
+  }
+
+  checkAuth() {
+    const authToken = sessionStorage.getItem('tudis_token');
+    if (authToken) {
+      const user = this.users.find(u => u.id == authToken);
+      if (user) {
+        this.currentUser = user;
+        document.getElementById('loginModal').style.display = 'none';
+        const adminSection = document.querySelector('.menu-section:last-child');
+        if(adminSection) adminSection.style.display = 'block';
+        return;
+      }
+    }
+    document.getElementById('loginModal').style.display = 'flex';
+    const adminSection = document.querySelector('.menu-section:last-child');
+    if(adminSection) adminSection.style.display = 'none';
+  }
+
+  setupEventListeners() {
+    const loginBtn = document.getElementById('loginBtn');
+    const demoLoginBtn = document.getElementById('demoLoginBtn');
+    const loginUser = document.getElementById('loginUser');
+    const loginPass = document.getElementById('loginPass');
+    
+    if(loginBtn) loginBtn.addEventListener('click', () => this.handleLogin());
+    if(demoLoginBtn) demoLoginBtn.addEventListener('click', () => this.demoLogin());
+    if(loginUser) loginUser.addEventListener('keypress', e => { if(e.key==='Enter') this.handleLogin(); });
+    if(loginPass) loginPass.addEventListener('keypress', e => { if(e.key==='Enter') this.handleLogin(); });
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if(logoutBtn) logoutBtn.addEventListener('click', () => this.logout());
+
+    const saveConfigBtn = document.getElementById('saveConfigBtn');
+    if(saveConfigBtn) saveConfigBtn.addEventListener('click', () => this.saveConfig());
+    
+    const resetConfigBtn = document.getElementById('resetConfigBtn');
+    if(resetConfigBtn) resetConfigBtn.addEventListener('click', () => this.resetConfig());
+    
+    const addUserBtn = document.getElementById('addUserBtn');
+    if(addUserBtn) addUserBtn.addEventListener('click', () => this.addUser());
+    
+    const applyFilterBtn = document.getElementById('applyFilterBtn');
+    if(applyFilterBtn) applyFilterBtn.addEventListener('click', () => this.filterLogs());
+    
+    const clearLogsBtn = document.getElementById('clearLogsBtn');
+    if(clearLogsBtn) clearLogsBtn.addEventListener('click', () => this.clearLogs());
+
+    const colorStamp = document.getElementById('configColorStamp');
+    const colorStampHex = document.getElementById('configColorStampHex');
+    if(colorStamp) colorStamp.addEventListener('change', e => { if(colorStampHex) colorStampHex.value = e.target.value; });
+    if(colorStampHex) colorStampHex.addEventListener('change', e => { if(colorStamp) colorStamp.value = e.target.value; });
+
+    const configLogoUpload = document.getElementById('configLogoUpload');
+    if(configLogoUpload) configLogoUpload.addEventListener('change', e => this.handleLogoUpload(e));
+    
+    const clearLogoBtn = document.getElementById('clearLogoBtn');
+    if(clearLogoBtn) clearLogoBtn.addEventListener('click', () => this.clearLogo());
+  }
+
+  handleLogin() {
+    const userEl = document.getElementById('loginUser');
+    const passEl = document.getElementById('loginPass');
+    if(!userEl || !passEl) return;
+    
+    const user = userEl.value;
+    const pass = passEl.value;
+    const foundUser = this.users.find(u => u.username === user && this.hashPassword(pass) === u.password && u.status === 'ativo');
+    
+    if (foundUser) {
+      sessionStorage.setItem('tudis_token', foundUser.id);
+      this.currentUser = foundUser;
+      this.addLog('login', `${foundUser.username} fez login`);
+      this.checkAuth();
+      this.updateUI();
+    } else {
+      alert('Usuário ou senha inválidos!');
+    }
+  }
+
+  demoLogin() {
+    const userEl = document.getElementById('loginUser');
+    const passEl = document.getElementById('loginPass');
+    if(userEl) userEl.value = 'admin';
+    if(passEl) passEl.value = 'admin';
+    this.handleLogin();
+  }
+
+  logout() {
+    this.addLog('logout', `${this.currentUser.username} fez logout`);
+    sessionStorage.removeItem('tudis_token');
+    this.currentUser = null;
+    this.checkAuth();
+    this.updateUI();
+  }
+
+  addUser() {
+    const nameEl = document.getElementById('newUserName');
+    const emailEl = document.getElementById('newUserEmail');
+    const passEl = document.getElementById('newUserPass');
+    const roleEl = document.getElementById('newUserRole');
+    const statusEl = document.getElementById('newUserStatus');
+    
+    if(!nameEl || !emailEl || !passEl || !roleEl || !statusEl) return;
+
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const pass = passEl.value;
+    const role = roleEl.value;
+    const status = statusEl.value;
+
+    if (!name || !email || !pass) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+    if (pass.length < 6) {
+      alert('Senha deve ter pelo menos 6 caracteres!');
+      return;
+    }
+    if (this.users.find(u => u.username === name)) {
+      alert('Este usuário já existe!');
+      return;
+    }
+
+    const newUser = {
+      id: Math.max(...this.users.map(u => u.id), 0) + 1,
+      username: name,
+      email: email,
+      password: this.hashPassword(pass),
+      role: role,
+      status: status,
+      createdAt: new Date().toISOString()
+    };
+
+    this.users.push(newUser);
+    this.saveToStorage();
+    this.addLog('user_manage', `Novo usuário ${name} criado com perfil ${role}`);
+    this.updateUsersTable();
+    nameEl.value = '';
+    emailEl.value = '';
+    passEl.value = '';
+    alert('Usuário criado com sucesso!');
+  }
+
+  deleteUser(userId) {
+    if (userId === this.currentUser.id) {
+      alert('Você não pode deletar sua própria conta!');
+      return;
+    }
+    if (confirm('Tem certeza que deseja deletar este usuário?')) {
+      const user = this.users.find(u => u.id === userId);
+      this.users = this.users.filter(u => u.id !== userId);
+      this.saveToStorage();
+      this.addLog('user_manage', `Usuário ${user.username} deletado`);
+      this.updateUsersTable();
+    }
+  }
+
+  toggleUserStatus(userId) {
+    const user = this.users.find(u => u.id === userId);
+    if (user) {
+      user.status = user.status === 'ativo' ? 'inativo' : 'ativo';
+      this.saveToStorage();
+      this.addLog('user_manage', `Status do usuário ${user.username} alterado para ${user.status}`);
+      this.updateUsersTable();
+    }
+  }
+
+  updateUsersTable() {
+    const tbody = document.getElementById('usersTableBody');
+    if(!tbody) return;
+    
+    tbody.innerHTML = this.users.map(u => `
+      <tr>
+        <td><strong>${u.username}</strong> ${u.id === this.currentUser?.id ? '(você)' : ''}</td>
+        <td>${u.email}</td>
+        <td><span class="role-badge role-${u.role}">${u.role}</span></td>
+        <td><span class="status-badge status-${u.status}">${u.status}</span></td>
+        <td>${new Date(u.createdAt).toLocaleDateString('pt-BR')}</td>
+        <td style="display:flex; gap:6px;">
+          <button class="icon-btn" onclick="tudisAdmin.toggleUserStatus(${u.id})" title="Alternar status">🔄</button>
+          <button class="icon-btn danger" onclick="tudisAdmin.deleteUser(${u.id})" title="Deletar" ${u.id === this.currentUser?.id ? 'disabled' : ''}>✕</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  saveConfig() {
+    const nameEl = document.getElementById('configSystemName');
+    const descEl = document.getElementById('configSystemDesc');
+    const devEl = document.getElementById('configDeveloper');
+    const colorEl = document.getElementById('configColorStamp');
+    const accentEl = document.getElementById('configColorAccent');
+    const themeEl = document.getElementById('configTheme');
+    
+    if(nameEl) this.config.systemName = nameEl.value;
+    if(descEl) this.config.systemDesc = descEl.value;
+    if(devEl) this.config.developer = devEl.value;
+    if(colorEl) this.config.colorStamp = colorEl.value;
+    if(accentEl) this.config.colorAccent = accentEl.value;
+    if(themeEl) this.config.theme = themeEl.value;
+    
+    this.saveToStorage();
+    this.addLog('config_change', 'Configurações do sistema alteradas');
+    this.updateUI();
+    alert('Configurações salvas com sucesso!');
+  }
+
+  resetConfig() {
+    if (confirm('Restaurar as configurações padrões?')) {
+      this.config = {
+        systemName: 'Tudis',
+        systemDesc: 'Ferramentas de PDF, OCR e QR Code',
+        version: '1.0.0',
+        developer: 'Desenvolvedor',
+        colorStamp: '#B23A2E',
+        colorAccent: '#2F6B4F',
+        theme: 'light',
+        logo: null
+      };
+      this.saveToStorage();
+      this.addLog('config_change', 'Configurações restauradas aos padrões');
+      location.reload();
+    }
+  }
+
+  handleLogoUpload(e) {
+    const file = e.target.files[0];
+    if (file && file.size <= 500000) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.config.logo = event.target.result;
+        this.updateLogoPreview();
+        this.saveToStorage();
+        this.addLog('config_change', 'Logomarca alterada');
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert('Arquivo muito grande (máx 500KB)');
+    }
+  }
+
+  clearLogo() {
+    this.config.logo = null;
+    this.updateLogoPreview();
+    this.saveToStorage();
+    this.addLog('config_change', 'Logomarca removida');
+  }
+
+  updateLogoPreview() {
+    const preview = document.getElementById('logoPreview');
+    if(!preview) return;
+    
+    if (this.config.logo) {
+      preview.innerHTML = `<img src="${this.config.logo}" style="max-width:100%; max-height:100%;">`;
+    } else {
+      preview.innerHTML = '<span class="dot" style="width:40px; height:40px; background:var(--stamp); display:inline-block; border-radius:50%;"></span>';
+    }
+  }
+
+  addLog(type, message) {
+    this.logs.unshift({
+      type: type,
+      message: message,
+      user: this.currentUser?.username || 'sistema',
+      timestamp: new Date().toISOString()
+    });
+    if (this.logs.length > 1000) this.logs.pop();
+    this.saveToStorage();
+  }
+
+  filterLogs() {
+    const typeEl = document.getElementById('filterLogType');
+    const periodEl = document.getElementById('filterLogPeriod');
+    
+    if(!typeEl || !periodEl) return;
+    
+    const type = typeEl.value;
+    const period = periodEl.value;
+    let filtered = [...this.logs];
+
+    if (type !== 'all') {
+      filtered = filtered.filter(l => l.type === type);
+    }
+
+    if (period !== 'all') {
+      const days = period === 'today' ? 1 : period === 'week' ? 7 : 30;
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - days);
+      filtered = filtered.filter(l => new Date(l.timestamp) >= cutoff);
+    }
+
+    this.displayLogs(filtered);
+  }
+
+  displayLogs(logs) {
+    const container = document.getElementById('logsContainer');
+    if(!container) return;
+    
+    container.innerHTML = logs.map(log => `
+      <div class="log-entry">
+        <span class="log-time">${new Date(log.timestamp).toLocaleString('pt-BR')}</span> •
+        <span class="log-user">${log.user}</span> •
+        <span class="log-action">${log.message}</span>
+      </div>
+    `).join('') || '<div class="log-entry">Nenhum log encontrado</div>';
+
+    const totalEl = document.getElementById('totalLogsCount');
+    if(totalEl) totalEl.textContent = this.logs.length;
+    
+    const today = this.logs.filter(l => new Date(l.timestamp).toDateString() === new Date().toDateString()).length;
+    const todayEl = document.getElementById('todayLogsCount');
+    if(todayEl) todayEl.textContent = today;
+    
+    const activeEl = document.getElementById('activeUsersCount');
+    if(activeEl) activeEl.textContent = this.users.filter(u => u.status === 'ativo').length;
+  }
+
+  clearLogs() {
+    if (confirm('Tem certeza que deseja limpar todos os logs? Esta ação não pode ser desfeita!')) {
+      this.logs = [];
+      this.saveToStorage();
+      this.displayLogs([]);
+      alert('Logs deletados com sucesso!');
+    }
+  }
+
+  updateUI() {
+    if (this.currentUser) {
+      const brandEl = document.querySelector('.menu-brand');
+      if(brandEl) {
+        if (this.config.logo) {
+          brandEl.innerHTML = `<img src="${this.config.logo}" style="width:24px; height:24px; border-radius:4px; margin-right:8px;">${this.config.systemName}`;
+        } else {
+          brandEl.textContent = this.config.systemName;
+        }
+      }
+      
+      const nameEl = document.getElementById('configSystemName');
+      if(nameEl) nameEl.value = this.config.systemName;
+      
+      const descEl = document.getElementById('configSystemDesc');
+      if(descEl) descEl.value = this.config.systemDesc;
+      
+      const versionEl = document.getElementById('configSystemVersion');
+      if(versionEl) versionEl.value = this.config.version;
+      
+      const devEl = document.getElementById('configDeveloper');
+      if(devEl) devEl.value = this.config.developer;
+      
+      const colorStampEl = document.getElementById('configColorStamp');
+      if(colorStampEl) colorStampEl.value = this.config.colorStamp;
+      
+      const colorStampHexEl = document.getElementById('configColorStampHex');
+      if(colorStampHexEl) colorStampHexEl.value = this.config.colorStamp;
+      
+      const colorAccentEl = document.getElementById('configColorAccent');
+      if(colorAccentEl) colorAccentEl.value = this.config.colorAccent;
+      
+      const colorAccentHexEl = document.getElementById('configColorAccentHex');
+      if(colorAccentHexEl) colorAccentHexEl.value = this.config.colorAccent;
+      
+      const themeEl = document.getElementById('configTheme');
+      if(themeEl) themeEl.value = this.config.theme;
+      
+      this.updateLogoPreview();
+      this.updateUsersTable();
+      this.filterLogs();
+    }
+  }
+}
+
+const tudisAdmin = new TudisAdmin();
 </script>
 </body>
 </html>
